@@ -30,7 +30,7 @@ services:
     image: eclipse-mosquitto
     container_name: mqttbroker
     ports:
-      - '1883:1883' #default mqtt port
+      - '30883:1883' #default mqtt port
       - '9001:9001' #default mqtt port for websockets
     volumes:
       - ./configs/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:rw

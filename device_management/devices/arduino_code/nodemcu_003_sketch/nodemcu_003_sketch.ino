@@ -29,7 +29,7 @@ WiFiClient wifiClient;
 
 // mqtt broker credentials
 const char *mqtt_server = SERVER_IP;
-const int mqtt_port = 1883;
+const int mqtt_port = 30883;
 
 // mqtt client
 const char *clientID = DEVICE_SERIAL;
