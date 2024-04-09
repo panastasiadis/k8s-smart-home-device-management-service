@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+        - name: web-container
+          image: ghcr.io/panastasiadis/device-management-service-web:v5
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: host-dev
+              mountPath: /dev/ttyUSB0
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - SYS_RAWIO
+          env:
+            - name: DJANGO_SUPERUSER_USERNAME
+              value: panastasiadis
+            - name: DJANGO_SUPERUSER_PASSWORD
+              value: "1234"
+            - name: DJANGO_SUPERUSER_EMAIL
+              value: panastasiadis@mail.com
+            - name: POSTGRES_NAME
+              value: postgres
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: MQTT_BROKER
+              value: mqttbroker
+            - name: MQTT_PORT
+              value: "1883"
+      volumes:
+        - name: host-dev
+          hostPath:
+            path: /dev/ttyUSB0
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec:
+  selector:
+    app: web-app
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: NodePort

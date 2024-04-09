@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mqttbroker-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mqttbroker-app
+  template:
+    metadata:
+      labels:
+        app: mqttbroker-app
+    spec:
+      containers:
+      - name: mqttbroker
+        image: eclipse-mosquitto
+        ports:
+        - containerPort: 1883
+        - containerPort: 9001
+        volumeMounts:
+        - name: mqtt-data
+          mountPath: /mosquitto/data
+        - name: mqtt-log
+          mountPath: /mosquitto/log
+        - name: mosquitto-config
+          mountPath: /mosquitto/config/mosquitto.conf
+          subPath: mosquitto.conf
+      volumes:
+      - name: mqtt-data
+        persistentVolumeClaim:
+          claimName: mqtt-data
+      - name: mqtt-log
+        persistentVolumeClaim:
+          claimName: mqtt-log
+      - name: mosquitto-config
+        configMap:
+          name: mosquitto-config
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mqttbroker
+spec:
+  selector:
+    app: mqttbroker-app
+  ports:
+    - protocol: TCP
+      port: 1883
+      targetPort: 1883
+      nodePort: 30883
+  type: NodePort
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mosquitto-config
+data:
+  mosquitto.conf: |
+    allow_anonymous true
+    listener 1883
+    listener 9001
+    protocol websockets
+    persistence true
+    persistence_file mosquitto.db
+    persistence_location /mosquitto/data/
