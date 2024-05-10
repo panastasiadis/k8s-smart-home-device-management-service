@@ -1,6 +1,7 @@
 [
   {
     "device": {
+      "name": "nodemcu-001",
       "serial": "nodemcu-001",
       "model": "NodeMCU",
       "sketch_name": "nodemcu_001_sketch",
@@ -8,7 +9,9 @@
     },
     "sensors": [
       {
+        "name": "bh1750fvi-001",
         "serial": "bh1750fvi-001",
+        "type": "Light Intensity",
         "model": "BH1750",
         "description": "A light intensity sensor to measure the light.",
         "accepts_commands": false
@@ -17,6 +20,7 @@
   },
   {
     "device": {
+      "name": "nodemcu-002",
       "serial": "nodemcu-002",
       "model": "NodeMCU",
       "sketch_name": "nodemcu_002_sketch",
@@ -24,26 +28,34 @@
     },
     "sensors": [
       {
+        "name": "dht11-temper-001",
         "serial": "dht11-temper-001",
+        "type": "Temperature",
         "model": "DHT11(Temperature)",
         "description": "Sensor that reads the current temperature.",
         "accepts_commands": false
       },
       {
+        "name": "dht11-humid-001",
         "serial": "dht11-humid-001",
+        "type": "Humidity",
         "model": "DHT11(Humidity)",
         "description": "Sensor that reads the current levels of humidity.",
         "accepts_commands": false
       },
       {
+        "name": "relay-ch1-001",
         "serial": "relay-ch1-001",
+        "type": "Relay",
         "model": "Relay Module(Channel 1)",
         "description": "Programmable switch to control devices that use the high voltage power supply.",
         "accepts_commands": true,
         "available_commands": ["ON", "OFF"]
       },
       {
+        "name": "relay-ch2-001",
         "serial": "relay-ch2-001",
+        "type": "Relay",
         "model": "Relay Module(Channel 2)",
         "description": "Programmable switch to control devices that use the high voltage power supply.",
         "accepts_commands": true,
@@ -53,6 +65,7 @@
   },
   {
     "device": {
+      "name": "nodemcu-003",
       "serial": "nodemcu-003",
       "model": "NodeMCU",
       "sketch_name": "nodemcu_003_sketch",
@@ -60,7 +73,9 @@
     },
     "sensors": [
       {
+        "name": "hc-srR501-001",
         "serial": "hc-srR501-001",
+        "type": "Motion Detection",
         "model": "HC-SR501",
         "description": "Motion detector to detect movements.",
         "accepts_commands": false
