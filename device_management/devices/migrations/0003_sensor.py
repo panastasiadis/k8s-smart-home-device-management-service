@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
                 ('serial', models.CharField(max_length=255, unique=True)),
                 ('name', models.CharField(blank=True, max_length=255, null=True)),
                 ('model', models.CharField(max_length=255)),
+                ('type', models.CharField(max_length=255)),
                 ('description', models.TextField()),
                 ('accepts_commands', models.BooleanField(default=False)),
                 ('available_commands', models.JSONField(blank=True, null=True)),
