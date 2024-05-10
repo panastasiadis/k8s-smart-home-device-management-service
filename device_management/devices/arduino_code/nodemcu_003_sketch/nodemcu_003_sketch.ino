@@ -16,7 +16,7 @@
 #define MOTION_DETECTOR_UNIT "boolean"
 
 // Time between printing and publishing sensor data
-#define PUBLISH_TIME_PERIOD 3000
+#define PUBLISH_TIME_PERIOD 1000
 
 // Will message values
 #define WILL_ONLINE_MESSAGE_VALUE "online"
@@ -166,7 +166,7 @@ void loop() {
   bool wifi_state = connect_to_wifi();
   bool mqtt_state = connect_to_mqtt();
 
-  delay(2000);
+  delay(1000);
   client.loop();
 
   unsigned long now = millis();
