@@ -1,5 +1,5 @@
 import serial
-from rest_framework import status, viewsets
+from rest_framework import filters, status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -16,6 +16,8 @@ from .utils import compile_and_flash_device, parse_device_serial
 class RoomsViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering = ['pk']
 
 
 class DeviceViewSet(viewsets.ModelViewSet):
@@ -23,6 +25,9 @@ class DeviceViewSet(viewsets.ModelViewSet):
 
     queryset = Device.objects.all()
     serializer_class = DeviceSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering = ['pk']
+
 
 
 class SensorViewSet(viewsets.ModelViewSet):
@@ -30,6 +35,8 @@ class SensorViewSet(viewsets.ModelViewSet):
 
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering = ['pk']
 
 
 class FlashSerialDevice(APIView):
