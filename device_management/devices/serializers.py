@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Device, Room, Sensor
+from .models import Action, Device, Room, Sensor
 
 
 class RoomSerializer(serializers.ModelSerializer):
@@ -78,3 +78,9 @@ class CommandSerializer(serializers.Serializer):
         data['device'] = device
 
         return data
+
+
+class ActionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Action
+        fields = '__all__'
