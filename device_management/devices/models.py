@@ -37,3 +37,24 @@ class Sensor(models.Model):
 
     def __str__(self):
         return self.model + ': ' + self.serial
+
+
+COMPARISON_CHOICES = [
+    ('=', 'Equal To'),
+    ('<', 'Less Than'),
+    ('>', 'Greater Than'),
+]
+
+
+class Action(models.Model):
+    initiator_sensor = models.ForeignKey(
+        Sensor, on_delete=models.CASCADE, related_name='initiator_actions')
+    recipient_sensor = models.ForeignKey(
+        Sensor, on_delete=models.CASCADE, related_name='recipient_actions')
+    check_value = models.FloatField()
+    comparison_type = models.CharField(
+        max_length=1, choices=COMPARISON_CHOICES)
+    command = models.CharField(max_length=255)
+    active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
