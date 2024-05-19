@@ -16,6 +16,8 @@ python manage.py populate_devices &
 # Run command that initialize an mqtt service and set devices connection status
 python manage.py set_device_status &
 
+python manage.py trigger_actions &
+
 # Wait for all background jobs to finish
 wait
 

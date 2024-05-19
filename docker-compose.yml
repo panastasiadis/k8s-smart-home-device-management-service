@@ -26,6 +26,10 @@ services:
       - POSTGRES_PORT=5432
       - MQTT_BROKER=mqttbroker
       - MQTT_PORT=1883
+    networks:
+      - default
+      - influxdb_network
+      - web_network
   mqttbroker:
     image: eclipse-mosquitto
     container_name: mqttbroker
@@ -49,4 +53,9 @@ networks:
   mqttbroker_network:
     name: mqttbroker_network
     driver: bridge
+  web_network:
+    name: web_network
+    driver: bridge
+  influxdb_network:
+    external: True
     
