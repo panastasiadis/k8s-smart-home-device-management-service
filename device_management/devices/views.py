@@ -5,8 +5,8 @@ from rest_framework.views import APIView
 
 from .exceptions import (DeviceGenericException, DeviceNoResponseException,
                          DeviceNotFoundException, DeviceUnknownSerialException)
-from .models import Device, Room, Sensor
-from .serializers import (CommandSerializer, DeviceSerializer,
+from .models import Action, Device, Room, Sensor
+from .serializers import (ActionSerializer, CommandSerializer, DeviceSerializer,
                           FlashSerialDeviceSerializer, RoomSerializer,
                           SensorSerializer)
 from .services import send_command_to_sensor
@@ -29,12 +29,19 @@ class DeviceViewSet(viewsets.ModelViewSet):
     ordering = ['pk']
 
 
-
 class SensorViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'head', 'put', 'patch']
 
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering = ['pk']
+
+
+class ActionViewSet(viewsets.ModelViewSet):
+
+    queryset = Action.objects.all()
+    serializer_class = ActionSerializer
     filter_backends = [filters.OrderingFilter]
     ordering = ['pk']
 
