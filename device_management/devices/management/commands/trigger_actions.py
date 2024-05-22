@@ -24,10 +24,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        ENV_INFLUXDB_URL = f'{os.getenv("INFLUXDB_HOST_TYPE")}://{os.getenv("INFLUXDB_HOST")}:{os.getenv("INFLUXDB_PORT")}'
-        ENV_INFLUXDB_TOKEN = os.getenv('INFLUXDB_ADMIN_TOKEN')
-        ENV_INFLUXDB_ORG = os.getenv('INFLUXDB_ORG')
-        ENV_INFLUXDB_BUCKET = os.getenv('INFLUXDB_BUCKET')
+        ENV_INFLUXDB_URL = f'{os.getenv("DOCKER_INFLUXDB_HOST_TYPE")}://{os.getenv("DOCKER_INFLUXDB_HOST")}:{os.getenv("DOCKER_INFLUXDB_PORT")}'
+        ENV_INFLUXDB_TOKEN = os.getenv('DOCKER_INFLUXDB_INIT_ADMIN_TOKEN')
+        ENV_INFLUXDB_ORG = os.getenv('DOCKER_INFLUXDB_INIT_ORG')
+        ENV_INFLUXDB_BUCKET = os.getenv('DOCKER_INFLUXDB_INIT_BUCKET')
 
         influx_client = InfluxDBClient(
             url=ENV_INFLUXDB_URL, token=ENV_INFLUXDB_TOKEN, org=ENV_INFLUXDB_ORG)
