@@ -44,6 +44,18 @@ spec:
               value: mqttbroker
             - name: MQTT_PORT
               value: "1883"
+            - name: DOCKER_INFLUXDB_INIT_ORG
+              value: "home_automation"
+            - name: DOCKER_INFLUXDB_INIT_BUCKET
+              value: "sensor_data_bucket"
+            - name: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
+              value: "adminToken123"
+            - name: DOCKER_INFLUXDB_HOST_TYPE
+              value: "http"
+            - name: DOCKER_INFLUXDB_HOST
+              value: "influxdb"
+            - name: DOCKER_INFLUXDB_PORT
+              value: "8086"
       volumes:
         - name: host-dev
           hostPath:
